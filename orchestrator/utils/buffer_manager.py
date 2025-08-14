@@ -73,7 +73,7 @@ class OrchestratorBufferManager:
             for uid in expired:
                 self.active_users.pop(uid, None)
 
-    # ✅ NEW: convenience readers for active users
+    #  convenience readers for active users
     def get_active_users(self) -> List[Dict[str, Any]]:
         """Return active users sorted by most recent last_seen (desc)."""
         with self._lock:
