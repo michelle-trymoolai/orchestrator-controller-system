@@ -26,7 +26,7 @@ class OrchestratorCreate(BaseModel):
 class FeatureUpdate(BaseModel):
     features: dict
 
-# ---------- Small helper to call C-OCS internal HTTP ----------
+# ----------  helper to call C-OCS internal HTTP ----------
 OCS_HTTP_HOST = os.getenv("CONTROLLER_OCS_HTTP_HOST", "localhost")
 OCS_HTTP_PORT = int(os.getenv("CONTROLLER_OCS_HTTP_PORT", "8010"))
 
@@ -48,7 +48,7 @@ def _ocx_get(path: str, params: str = ""):
 # ---------- Config-backed org CRUD ----------
 @app.get("/organizations")
 def list_orgs():
-    # ensure we read the freshest presence/status persisted by C-OCS
+    # ensure to read the freshest presence/status persisted by C-OCS
     controller_config.reload_config()
     return controller_config.get_config().get("organizations", {})
 
@@ -110,7 +110,7 @@ async def force_provision(org_id: str):
     controller_buffers.add_activity("provisioning_forced", {"orch_id": org_id})
     return {"status": "sent", "org_id": org_id}
 
-# ---------- Existing: Buffer stats + activities (THIS process) ----------
+# ----------  Buffer stats + activities  ----------
 @app.get("/buffer_stats")
 def buffer_stats():
     return controller_buffers.get_stats()
@@ -119,7 +119,7 @@ def buffer_stats():
 def activities(limit: int = 50, offset: int = 0):
     return controller_buffers.get_recent_activities(limit=limit, offset=offset)
 
-# ---------- Proxies to C-OCS internal HTTP (live data from that process) ----------
+# ---------- Proxies to C-OCS internal HTTP (live data ) ----------
 @app.get("/orchestrators_live")
 def orchestrators_live():
     return _ocx_get("/ocx/orchestrators")
