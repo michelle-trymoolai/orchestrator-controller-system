@@ -4,7 +4,7 @@ from datetime import datetime, timezone
 from typing import Dict, Any, Optional
 
 _lock = threading.RLock()
-_connected: Dict[str, dict] = {}  # orch_id -> {"ws": ws, "last_seen": iso, "metadata": {...}}
+_connected: Dict[str, dict] = {}  
 
 def _now_iso() -> str:
     return datetime.now(timezone.utc).isoformat()
