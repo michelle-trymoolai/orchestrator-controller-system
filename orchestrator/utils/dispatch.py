@@ -87,8 +87,8 @@ def _persist_provisioning_to_config(msg: Dict[str, Any], _orchestrator_config):
         if isinstance(prov_features, dict):
             cfg.setdefault("features", {}).update(prov_features)
 
-        # Optional: merge other top-level provisioning knobs here if you add them
-        # e.g., firewall/cache params, etc.
+        # merge other top-level provisioning knobs here if you add them
+        # firewall/cache params
 
         _orchestrator_config.update_config(cfg)
     except Exception as e:
@@ -142,7 +142,7 @@ def dispatch_incoming(msg: Dict[str, Any], orchestrator_id: str, _orchestrator_c
         logger.info(f"[O-DISPATCH] command: {msg}")
 
     elif mtype == "o_config_snapshot_ack":
-        # Optional: track ack from controller when it stores our snapshot
+        # Optional: track ack from controller when it stores in snapshot
         logger.debug(f"[O-DISPATCH:{orchestrator_id}] o_config_snapshot_ack: {msg}")
 
     else:
