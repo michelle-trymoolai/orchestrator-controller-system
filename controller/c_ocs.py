@@ -53,7 +53,7 @@ def build_ssl_context():
         ctx.load_cert_chain(certfile=CERT_FILE, keyfile=KEY_FILE)
         if os.path.exists(CA_FILE):
             ctx.load_verify_locations(CA_FILE)
-            ctx.verify_mode = ssl.CERT_OPTIONAL  # set CERT_REQUIRED for strict mTLS
+            ctx.verify_mode = ssl.CERT_OPTIONAL  # set CERT_REQUIRED
             logger.info("[C-OCS] CA loaded; client certs optional")
         else:
             ctx.verify_mode = ssl.CERT_NONE
@@ -108,10 +108,10 @@ async def handler(ws):
 # Provisioning delta watcher
 # ---------------------------
 async def provisioning_watcher(interval_seconds: int = 2):
-    from controller.utils.provisioning import send_provisioning_to  # local import to avoid cycles
+    from controller.utils.provisioning import send_provisioning_to  
     while True:
         try:
-            controller_config.reload_config()  # pick up C-GUI edits from disk
+            controller_config.reload_config()  # pick up C-GUI edits
             cfg = controller_config.get_config()
             orgs = cfg.get("organizations", {})
 
@@ -173,7 +173,7 @@ def ocx_orchestrators():
 # Expose last received O-Config snapshots (optional, if stored by dispatch)
 @http_app.get("/ocx/o_config/{org_id}")
 def ocx_o_config(org_id: str):
-    # read the freshest on-disk config, because dispatch wrote snapshots there
+    # read the freshest on-disk config, dispatch wrote snapshots there
     controller_config.reload_config()
     cfg = controller_config.get_config()
     org = (cfg.get("organizations") or {}).get(org_id)
