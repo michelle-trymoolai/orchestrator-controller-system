@@ -9,7 +9,7 @@ from datetime import datetime, timezone
 from typing import Any, Dict
 from typing import Optional  
 
-# Best-effort POSIX file locking (no-op on non-POSIX)
+# POSIX file locking (no-op on non-POSIX)
 try:
     import fcntl  # type: ignore
     _HAVE_FCNTL = True
