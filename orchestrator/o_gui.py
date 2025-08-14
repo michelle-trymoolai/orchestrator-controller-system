@@ -160,7 +160,7 @@ async def process_prompt(p: PromptIn, request: Request):
     # always keep background behavior
     asyncio.create_task(_run_agent(prompt_id, p.user_id, p.prompt, meta))
 
-    # optional: keep connection open for netstat demo
+    # keeping connection open for netstat
     try:
         raw_delay = request.query_params.get("delay", "0")
         delay = max(0.0, min(10.0, float(raw_delay)))
@@ -170,7 +170,7 @@ async def process_prompt(p: PromptIn, request: Request):
     except ValueError:
         raise HTTPException(status_code=400, detail="delay must be a number")
 
-    # NEW: synchronous simulated reply
+    # synchronous simulated reply
     simulate_flag = request.query_params.get("simulate", "0").lower()
     simulate = simulate_flag in ("1", "true", "yes")
     if simulate:
@@ -178,7 +178,7 @@ async def process_prompt(p: PromptIn, request: Request):
         await asyncio.sleep(0.2)
         sim = _simulate_agent_response(p.prompt)
 
-        # write back for pollers (if your buffer supports it)
+        # write back for pollers 
         try:
             if buffer_manager and hasattr(buffer_manager, "update_prompt_response"):
                 buffer_manager.update_prompt_response(prompt_id, sim)
@@ -235,7 +235,7 @@ def active_user(user_id: str):
         raise HTTPException(404, "unknown user_id")
     return item
 
-# --- background 'agent' task (demo only) ---
+# --- background 'agent' task  ---
 async def _run_agent(prompt_id: str, user_id: str, prompt: str, meta: dict):
     try:
         await asyncio.sleep(0.5)
