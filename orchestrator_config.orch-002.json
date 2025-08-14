@@ -1,0 +1,137 @@
+{
+  "cache": {
+    "cleanup_interval_seconds": 300,
+    "enabled": false,
+    "max_size": 1000,
+    "ttl_seconds": 3600
+  },
+  "features": {
+    "agentic_rag_agent": false,
+    "cache": true,
+    "evaluation_agent": false,
+    "firewall": true,
+    "llm": true,
+    "prompt_domain_identifier_agent": false,
+    "prompt_response_agent": true,
+    "task_agent": false
+  },
+  "firewall": {
+    "blocked_keywords": [
+      "hack",
+      "exploit",
+      "malware",
+      "virus",
+      "attack"
+    ],
+    "blocklist": [
+      "malicious.com",
+      "spam.net",
+      "phishing.org"
+    ],
+    "enabled": false,
+    "max_prompt_length": 10000,
+    "rate_limit_per_minute": 60
+  },
+  "gui": {
+    "cors_origins": [
+      "*"
+    ],
+    "orchestrator_port": 8004,
+    "request_timeout_seconds": 30
+  },
+  "last_seen": "2025-08-11T22:21:56.839117+00:00",
+  "llm": {
+    "enabled": true,
+    "max_tokens": 1000,
+    "model": "gpt-3.5-turbo",
+    "temperature": 0.7,
+    "timeout_seconds": 30
+  },
+  "metadata": {
+    "capabilities": [],
+    "created": "2025-08-07T23:37:15.320704",
+    "last_updated": "2025-08-11T22:21:56.839174+00:00",
+    "ssl_enabled": false,
+    "version": "1.0.0"
+  },
+  "orchestrator_id": "orch-002",
+  "organization": {
+    "location": "localhost",
+    "name": "Team Beta"
+  },
+  "organizations": {
+    "orch-001": {
+      "features": {
+        "agentic_rag_agent": false,
+        "cache": true,
+        "evaluation_agent": false,
+        "firewall": true,
+        "llm": true,
+        "prompt_domain_identifier_agent": false,
+        "prompt_response_agent": true,
+        "task_agent": false
+      },
+      "location": "localhost",
+      "metadata": {
+        "features": {
+          "agentic_rag_agent": false,
+          "cache": true,
+          "evaluation_agent": false,
+          "firewall": true,
+          "llm": false,
+          "prompt_domain_identifier_agent": false,
+          "prompt_response_agent": true,
+          "task_agent": false
+        },
+        "hostname": "MacBookPro.lan",
+        "ip": "192.168.1.99",
+        "location": "localhost",
+        "name": "Default Organization",
+        "ssl_enabled": false,
+        "version": "1.0.0"
+      },
+      "name": "Default Organization"
+    },
+    "orch-002": {
+      "features": {
+        "agentic_rag_agent": false,
+        "cache": true,
+        "evaluation_agent": false,
+        "firewall": true,
+        "llm": true,
+        "prompt_domain_identifier_agent": false,
+        "prompt_response_agent": true,
+        "task_agent": false
+      },
+      "location": "localhost",
+      "metadata": {
+        "features": {
+          "agentic_rag_agent": false,
+          "cache": true,
+          "evaluation_agent": false,
+          "firewall": true,
+          "llm": true,
+          "prompt_domain_identifier_agent": false,
+          "prompt_response_agent": true,
+          "task_agent": false
+        },
+        "hostname": "MacBookPro.lan",
+        "ip": "192.168.1.99",
+        "location": "localhost",
+        "name": "Team Beta",
+        "ssl_enabled": false,
+        "version": "1.0.0"
+      },
+      "name": "Team Beta"
+    }
+  },
+  "service_type": "orchestrator",
+  "status": "active",
+  "websocket": {
+    "controller_host": "localhost",
+    "controller_port": 8765,
+    "keepalive_interval": 10,
+    "max_reconnect_attempts": 10,
+    "reconnect_delay": 5
+  }
+}
