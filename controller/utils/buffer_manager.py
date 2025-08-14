@@ -11,10 +11,10 @@ class ControllerBufferManager:
     def __init__(self, activity_buffer_size: int = 5000, queue_maxsize: int = 0):
         self._lock = threading.RLock()
 
-        # Activity log (most recent last; we'll reverse on read)
+        # Activity log (most recent last)
         self._activity = deque(maxlen=activity_buffer_size)
 
-        # Non-blocking queue from C-GUI to C-OCS (0 == infinite)
+        # Non-blocking queue from C-GUI to C-OCS 
         self._gui_to_ocs = queue.Queue(maxsize=queue_maxsize)
 
         self._stats = {
