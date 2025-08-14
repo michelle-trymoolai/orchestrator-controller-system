@@ -14,7 +14,7 @@ async def send_provisioning_to(ws, orch_id: str, controller_config):
         return
 
     # Send only what the orchestrator needs (features + metadata + name/location),
-    # AND include orchestrator_id explicitly.
+    #  include orchestrator_id explicitly.
     msg = {
         "type": "provisioning",
         "data": {
