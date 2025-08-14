@@ -13,12 +13,12 @@ from typing import Optional
 from dotenv import load_dotenv
 import socket
 import uuid
-import random  # jittered reconnects
+import random  
 
 from orchestrator.utils.buffer_manager import buffer_manager
-from orchestrator.utils.dispatch import dispatch_incoming  # <- we'll update this next
+from orchestrator.utils.dispatch import dispatch_incoming  
 
-# NEW: lightweight internal HTTP for health + push_config
+# lightweight internal HTTP for health + push_config
 from fastapi import FastAPI
 import uvicorn
 
@@ -43,7 +43,7 @@ except ImportError as e:
 
 CONTROLLER_HOST = os.getenv("CONTROLLER_HOST", "localhost")
 CONTROLLER_PORT = int(os.getenv("CONTROLLER_PORT", "8765"))
-WS_PATH = os.getenv("CONTROLLER_WS_PATH", "")  # C-OCS ignores path; safe either way
+WS_PATH = os.getenv("CONTROLLER_WS_PATH", "")  
 
 ORCHESTRATOR_ID = os.getenv("ORCHESTRATOR_ID", "orch-001")
 CERT_PATH = os.getenv("CERT_PATH", "orchestrator/certs/")
@@ -52,7 +52,7 @@ CLIENT_KEY = os.path.join(CERT_PATH, "client_key.pem")
 CA_CERT = os.path.join(CERT_PATH, "ca_cert.pem")
 KEEPALIVE_INTERVAL = int(os.getenv("WEBSOCKET_KEEPALIVE_INTERVAL", "10"))
 
-# NEW: internal HTTP port (for health + push_config)
+# internal HTTP port (for health + push_config)
 ORCH_HTTP_PORT = int(os.getenv("ORCHESTRATOR_HTTP_PORT", "8011"))
 
 config_manager = None
@@ -86,7 +86,7 @@ def build_ssl_context():
         ctx.check_hostname = True
         logger.info("[O-CCS] Using CA verification")
     else:
-        # Dev-friendly fallback. Do NOT use in production.
+        # Dev-friendly fallback
         ctx.verify_mode = ssl.CERT_NONE
         ctx.check_hostname = False
         logger.warning("[O-CCS] CA cert missing; disabling verification (dev)")
@@ -169,7 +169,7 @@ async def send_keepalive(ws):
             await ws.send(json.dumps(msg))
             _keepalives_sent += 1
             _frames_tx += 1
-            # locally refresh last_seen so UI remains responsive even if ack drops
+            # UI remains responsive even if ack drops
             try:
                 if buffer_manager:
                     buffer_manager.update_active_user(
