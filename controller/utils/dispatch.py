@@ -103,7 +103,7 @@ async def dispatch_incoming(ws, orch_id: str, msg: Dict[str, Any], last_sent_fea
             controller_buffers.add_activity("provisioning_error", {"orch_id": orch_id, "error": str(e)})
             logger.warning(f"[C-DISPATCH] provisioning_request failed for {orch_id}: {e}")
 
-    # ✅ NEW: accept and store O-Config snapshots from the orchestrator
+    #  accept and store O-Config snapshots from the orchestrator
     elif mtype == "o_config_snapshot":
         try:
             cfg = controller_config.get_config()
